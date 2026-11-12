@@ -1,0 +1,41 @@
+{
+  "task": "Fix whitespace handling without changing port validation",
+  "required": [
+    "unit",
+    "syntax"
+  ],
+  "max_age_seconds": 3600,
+  "max_executions_per_check_snapshot": 3,
+  "environment_keys": [
+    "CHECKGATE_TEST_CONTEXT"
+  ],
+  "checks": {
+    "unit": {
+      "argv": [
+        "{python}",
+        "-B",
+        "-m",
+        "unittest",
+        "-q",
+        "test_port_parser"
+      ],
+      "inputs": [
+        "*.py",
+        "settings.json",
+        "requirements.lock"
+      ]
+    },
+    "syntax": {
+      "argv": [
+        "{python}",
+        "-B",
+        "syntax_check.py"
+      ],
+      "inputs": [
+        "*.py",
+        "settings.json",
+        "requirements.lock"
+      ]
+    }
+  }
+}

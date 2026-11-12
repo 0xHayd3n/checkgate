@@ -1,0 +1,121 @@
+name: Cross-platform checks
+
+on:
+  push:
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ci-${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  test:
+    name: ${{ matrix.os }} / Python ${{ matrix.python }}
+    runs-on: ${{ matrix.os }}
+    timeout-minutes: 15
+    strategy:
+      fail-fast: false
+      matrix:
+        # Python 3.10 is unavailable on GitHub's Apple Silicon Python images.
+        os: [ubuntu-24.04, windows-2022, macos-15-intel]
+        python: ['3.10', '3.12', '3.14']
+        include:
+          - os: macos-latest
+            python: '3.14'
+    defaults:
+      run:
+        shell: bash
+    env:
+      PYTHONDONTWRITEBYTECODE: '1'
+      PYTHONUTF8: '1'
+      PIP_DISABLE_PIP_VERSION_CHECK: '1'
+    steps:
+      - name: Check out reviewed source
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+      - name: Set up Python
+        uses: actions/setup-python@6d4fd22b20465ccc0f7354476588e8df7c9ca0e0 # v7
+        with:
+          python-version: ${{ matrix.python }}
+      - name: Run behavioral and integration tests
+        run: python -B -m unittest discover -v
+      - name: Build and install a wheel
+        run: |
+          python -m pip wheel --no-deps --wheel-dir wheelhouse .
+          python -m pip install --no-deps wheelhouse/*.whl
+          python -m pip check
+      - name: Build the portable zipapp
+        run: python -B build.py --output dist/checkgate.pyz
+      - name: Smoke test installed commands and zipapp outside the checkout
+        run: |
+          python -B - <<'PY'
+          import json
+          from pathlib import Path
+          import shutil
+          import subprocess
+          import sys
+          import tempfile
+
+          archive = (Path.cwd() / "dist/checkgate.pyz").resolve()
+          # A checkout's checkgate.py can shadow the installed console on Windows.
+          suffix = ".exe" if sys.platform == "win32" else ""
+          cli = shutil.which("checkgate" + suffix)
+          mcp = shutil.which("checkgate-mcp" + suffix)
+          assert cli and mcp, "Wheel did not install the command entry points"
+
+          with tempfile.TemporaryDirectory(prefix="checkgate-installed-") as temporary:
+              work = Path(temporary)
+              fixture = work / "task with spaces"
+
+              def invoke(argv, payload=None):
+                  process = subprocess.run(argv, cwd=work, input=payload, capture_output=True,
+                                           text=True, encoding="utf-8", timeout=30, shell=False)
+                  assert process.returncode == 0, (argv, process.returncode, process.stderr)
+                  return process.stdout
+
+              invoke([cli, "--help"])
+              invoke([mcp, "--help"])
+              invoke([cli, "init", "--root", str(fixture), "--demo"])
+              invoke([cli, "doctor", "--root", str(fixture)])
+              for check in ("unit", "syntax"):
+                  result = json.loads(invoke([cli, "run", check, "--root", str(fixture)]))
+                  assert result.get("result") == "passed", result
+              result = json.loads(invoke([cli, "complete", "--root", str(fixture)]))
+              assert result["decision"] == "complete", result
+
+              requests = [
+                  {"jsonrpc": "2.0", "id": 1, "method": "initialize", "params": {
+                      "protocolVersion": "2025-06-18", "capabilities": {},
+                      "clientInfo": {"name": "checkgate-ci", "version": "1"}}},
+                  {"jsonrpc": "2.0", "method": "notifications/initialized"},
+                  {"jsonrpc": "2.0", "id": 2, "method": "tools/list"},
+                  {"jsonrpc": "2.0", "id": 3, "method": "tools/call", "params": {
+                      "name": "checkgate_status", "arguments": {}}},
+              ]
+              payload = "".join(json.dumps(request) + "\n" for request in requests)
+              for command in ([mcp, "--root", str(fixture)],
+                              [sys.executable, "-B", str(archive), "mcp", "--root", str(fixture)]):
+                  responses = [json.loads(line) for line in invoke(command, payload).splitlines()]
+                  assert [response["id"] for response in responses] == [1, 2, 3], responses
+                  names = {tool["name"] for tool in responses[1]["result"]["tools"]}
+                  assert names == {"checkgate_status", "checkgate_run"}, names
+                  assert responses[2]["result"]["structuredContent"]["decision"] == "complete", responses
+              invoke([sys.executable, "-B", str(archive), "--help"])
+              result = json.loads(invoke([sys.executable, "-B", str(archive), "status", "--root", str(fixture)]))
+              assert result["decision"] == "complete", result
+          print("Installed wheel and zipapp CLI/MCP smoke checks passed; no live inference.")
+          PY
+      - name: Retain wheel and zipapp artifacts
+        uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7
+        with:
+          name: checkgate-${{ matrix.os }}-py${{ matrix.python }}
+          path: |
+            wheelhouse/*.whl
+            dist/checkgate.pyz
+          if-no-files-found: error
+          retention-days: 14

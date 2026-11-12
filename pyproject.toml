@@ -1,0 +1,40 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "checkgate-agent"
+dynamic = ["version"]
+description = "Local verification evidence and completion gates for coding agents"
+readme = "README.md"
+requires-python = ">=3.10"
+dependencies = []
+license = {file = "LICENSE"}
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Programming Language :: Python :: 3.13",
+    "Operating System :: OS Independent",
+]
+
+[project.scripts]
+checkgate = "entrypoint:main"
+checkgate-mcp = "entrypoint:mcp_main"
+
+[project.urls]
+Homepage = "https://github.com/0xHayd3n/checkgate"
+Repository = "https://github.com/0xHayd3n/checkgate"
+Issues = "https://github.com/0xHayd3n/checkgate/issues"
+
+[tool.setuptools]
+py-modules = [
+    "agent_host", "benchmark", "broad_benchmark", "checkgate", "configure",
+    "demo", "entrypoint", "hermes_hook", "integration_demo", "mcp_server",
+    "optimization_benchmark", "providers", "service", "task_catalog",
+]
+packages = ["task_sets"]
+
+[tool.setuptools.dynamic]
+version = {attr = "checkgate.VERSION"}

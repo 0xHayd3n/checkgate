@@ -1,0 +1,47 @@
+# Python environments, caches and package builds.
+__pycache__/
+*.py[cod]
+*.egg-info/
+.venv/
+venv/
+env/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.coverage
+.coverage.*
+htmlcov/
+/build/
+/dist/
+/wheelhouse/
+node_modules/
+
+# Local execution evidence and raw experiment/runtime data can contain paths,
+# source excerpts and command output. Publish reviewed aggregates separately.
+.checkgate/
+/results/
+/runtime/
+/work/
+/verification/mcp/results.json
+/verification/mcp/fixture-*/
+*.log
+*.sqlite
+*.sqlite-shm
+*.sqlite-wal
+
+# Local credentials, provider state and editor/OS files.
+.env
+.env.*
+!.env.example
+.codex/
+auth.json
+credentials.json
+*.pem
+*.key
+*.p12
+*.pfx
+.idea/
+.vscode/
+.DS_Store
+Thumbs.db
+Desktop.ini

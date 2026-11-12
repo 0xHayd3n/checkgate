@@ -1,0 +1,515 @@
+{
+  "schema": 1,
+  "date": "2026-11-12",
+  "scope": "Small synthetic Python coding tasks in the Checkgate controlled host; not native Hermes or DS Bot",
+  "model": "gpt-6.1-sol",
+  "reasoning": "low",
+  "tasks": 6,
+  "trials_per_task": 2,
+  "runs": 48,
+  "fully_successful_groups": 12,
+  "experiment_wall_seconds": 935.8303440999989,
+  "usage_note": "Cached input is a subset of input; total tokens = input + output. Effective TPS is not pure decoding TPS.",
+  "variants": {
+    "current": {
+      "runs": 12,
+      "successful_runs": 12,
+      "failed_runs": 0,
+      "end_to_end_seconds": {
+        "count": 12,
+        "total": 279.68876269999964,
+        "mean": 23.307396891666638,
+        "median": 20.729909749999933
+      },
+      "host_seconds": {
+        "count": 12,
+        "total": 278.196763,
+        "mean": 23.183063583333333,
+        "median": 20.6045125
+      },
+      "model_calls": {
+        "count": 12,
+        "total": 24,
+        "mean": 2,
+        "median": 2.0
+      },
+      "check_executions": {
+        "count": 12,
+        "total": 24,
+        "mean": 2,
+        "median": 2.0
+      },
+      "model_input_chars": {
+        "count": 12,
+        "total": 92772,
+        "mean": 7731,
+        "median": 7280.0
+      },
+      "timing_breakdown": {
+        "fixture_create_seconds": {
+          "count": 12,
+          "total": 0.06648040000072797,
+          "mean": 0.005540033333393997,
+          "median": 0.00526609999997163
+        },
+        "provider_init_seconds": {
+          "count": 12,
+          "total": 0.6403845999957412,
+          "mean": 0.05336538333297843,
+          "median": 0.054662000000462285
+        },
+        "host_run_elapsed_seconds": {
+          "count": 12,
+          "total": 278.19714390000263,
+          "mean": 23.18309532500022,
+          "median": 20.604546699999446
+        },
+        "provider_call_seconds": {
+          "count": 12,
+          "total": 274.256093999993,
+          "mean": 22.85467449999942,
+          "median": 20.277899299999262
+        },
+        "evaluation_seconds": {
+          "count": 12,
+          "total": 0.6994320999983756,
+          "mean": 0.05828600833319797,
+          "median": 0.056503650000195194
+        },
+        "artifact_save_seconds": {
+          "count": 12,
+          "total": 0.08150949999799195,
+          "mean": 0.006792458333165996,
+          "median": 0.006908099999236583
+        }
+      },
+      "measured_usage": {
+        "runs": 12,
+        "unknown_or_partial_runs": 0,
+        "tokens": {
+          "input_tokens": {
+            "count": 12,
+            "total": 277809,
+            "mean": 23150.75,
+            "median": 22984.5
+          },
+          "cached_input_tokens": {
+            "count": 12,
+            "total": 206080,
+            "mean": 17173.333333333332,
+            "median": 17920.0
+          },
+          "cache_write_tokens": {
+            "count": 12,
+            "total": 0,
+            "mean": 0,
+            "median": 0.0
+          },
+          "output_tokens": {
+            "count": 12,
+            "total": 4912,
+            "mean": 409.3333333333333,
+            "median": 343.5
+          },
+          "uncached_input_tokens": {
+            "count": 12,
+            "total": 71729,
+            "mean": 5977.416666666667,
+            "median": 5127.0
+          },
+          "total_tokens": {
+            "count": 12,
+            "total": 282721,
+            "mean": 23560.083333333332,
+            "median": 23287.5
+          }
+        }
+      },
+      "known_partial_usage": {
+        "runs": 0,
+        "note": "Known completed-round tokens only; missing or failed-round usage remains unknown.",
+        "tokens": {
+          "input_tokens": 0,
+          "cached_input_tokens": 0,
+          "cache_write_tokens": 0,
+          "output_tokens": 0
+        }
+      }
+    },
+    "compact_only": {
+      "runs": 12,
+      "successful_runs": 12,
+      "failed_runs": 0,
+      "end_to_end_seconds": {
+        "count": 12,
+        "total": 268.4865399999999,
+        "mean": 22.373878333333323,
+        "median": 22.14752420000059
+      },
+      "host_seconds": {
+        "count": 12,
+        "total": 266.979611,
+        "mean": 22.24830091666667,
+        "median": 22.022616
+      },
+      "model_calls": {
+        "count": 12,
+        "total": 24,
+        "mean": 2,
+        "median": 2.0
+      },
+      "check_executions": {
+        "count": 12,
+        "total": 24,
+        "mean": 2,
+        "median": 2.0
+      },
+      "model_input_chars": {
+        "count": 12,
+        "total": 56494,
+        "mean": 4707.833333333333,
+        "median": 4690.0
+      },
+      "timing_breakdown": {
+        "fixture_create_seconds": {
+          "count": 12,
+          "total": 0.06828339999810851,
+          "mean": 0.005690283333175709,
+          "median": 0.005618449999928998
+        },
+        "provider_init_seconds": {
+          "count": 12,
+          "total": 0.6733425000002171,
+          "mean": 0.056111875000018095,
+          "median": 0.05360579999978654
+        },
+        "host_run_elapsed_seconds": {
+          "count": 12,
+          "total": 266.98000350000075,
+          "mean": 22.24833362500006,
+          "median": 22.022645100000773
+        },
+        "provider_call_seconds": {
+          "count": 12,
+          "total": 262.81159659999685,
+          "mean": 21.90096638333307,
+          "median": 21.681818699998985
+        },
+        "evaluation_seconds": {
+          "count": 12,
+          "total": 0.6890010999941296,
+          "mean": 0.05741675833284413,
+          "median": 0.055271849999371625
+        },
+        "artifact_save_seconds": {
+          "count": 12,
+          "total": 0.07219619999887072,
+          "mean": 0.006016349999905894,
+          "median": 0.005912149999858229
+        }
+      },
+      "measured_usage": {
+        "runs": 12,
+        "unknown_or_partial_runs": 0,
+        "tokens": {
+          "input_tokens": {
+            "count": 12,
+            "total": 269422,
+            "mean": 22451.833333333332,
+            "median": 22418.5
+          },
+          "cached_input_tokens": {
+            "count": 12,
+            "total": 215040,
+            "mean": 17920,
+            "median": 17920.0
+          },
+          "cache_write_tokens": {
+            "count": 12,
+            "total": 0,
+            "mean": 0,
+            "median": 0.0
+          },
+          "output_tokens": {
+            "count": 12,
+            "total": 4634,
+            "mean": 386.1666666666667,
+            "median": 343.5
+          },
+          "uncached_input_tokens": {
+            "count": 12,
+            "total": 54382,
+            "mean": 4531.833333333333,
+            "median": 4498.5
+          },
+          "total_tokens": {
+            "count": 12,
+            "total": 274056,
+            "mean": 22838,
+            "median": 22740.0
+          }
+        }
+      },
+      "known_partial_usage": {
+        "runs": 0,
+        "note": "Known completed-round tokens only; missing or failed-round usage remains unknown.",
+        "tokens": {
+          "input_tokens": 0,
+          "cached_input_tokens": 0,
+          "cache_write_tokens": 0,
+          "output_tokens": 0
+        }
+      }
+    },
+    "preload_only": {
+      "runs": 12,
+      "successful_runs": 12,
+      "failed_runs": 0,
+      "end_to_end_seconds": {
+        "count": 12,
+        "total": 183.84743100000014,
+        "mean": 15.320619250000012,
+        "median": 14.243206150000333
+      },
+      "host_seconds": {
+        "count": 12,
+        "total": 182.316892,
+        "mean": 15.193074333333334,
+        "median": 14.111843
+      },
+      "model_calls": {
+        "count": 12,
+        "total": 12,
+        "mean": 1,
+        "median": 1.0
+      },
+      "check_executions": {
+        "count": 12,
+        "total": 24,
+        "mean": 2,
+        "median": 2.0
+      },
+      "model_input_chars": {
+        "count": 12,
+        "total": 52728,
+        "mean": 4394,
+        "median": 4364.0
+      },
+      "timing_breakdown": {
+        "fixture_create_seconds": {
+          "count": 12,
+          "total": 0.06471479999709118,
+          "mean": 0.005392899999757598,
+          "median": 0.005231049999565585
+        },
+        "provider_init_seconds": {
+          "count": 12,
+          "total": 0.6772224999967875,
+          "mean": 0.056435208333065624,
+          "median": 0.05609479999930045
+        },
+        "host_run_elapsed_seconds": {
+          "count": 12,
+          "total": 182.31725980000192,
+          "mean": 15.193104983333493,
+          "median": 14.111873750000086
+        },
+        "provider_call_seconds": {
+          "count": 12,
+          "total": 178.440723300002,
+          "mean": 14.870060275000165,
+          "median": 13.79307764999976
+        },
+        "evaluation_seconds": {
+          "count": 12,
+          "total": 0.7138220000015281,
+          "mean": 0.05948516666679401,
+          "median": 0.054962199999863515
+        },
+        "artifact_save_seconds": {
+          "count": 12,
+          "total": 0.06984999999804131,
+          "mean": 0.00582083333317011,
+          "median": 0.005653600000186998
+        }
+      },
+      "measured_usage": {
+        "runs": 12,
+        "unknown_or_partial_runs": 0,
+        "tokens": {
+          "input_tokens": {
+            "count": 12,
+            "total": 140274,
+            "mean": 11689.5,
+            "median": 11652.0
+          },
+          "cached_input_tokens": {
+            "count": 12,
+            "total": 107520,
+            "mean": 8960,
+            "median": 8960.0
+          },
+          "cache_write_tokens": {
+            "count": 12,
+            "total": 0,
+            "mean": 0,
+            "median": 0.0
+          },
+          "output_tokens": {
+            "count": 12,
+            "total": 4486,
+            "mean": 373.8333333333333,
+            "median": 315.5
+          },
+          "uncached_input_tokens": {
+            "count": 12,
+            "total": 32754,
+            "mean": 2729.5,
+            "median": 2692.0
+          },
+          "total_tokens": {
+            "count": 12,
+            "total": 144760,
+            "mean": 12063.333333333334,
+            "median": 11941.5
+          }
+        }
+      },
+      "known_partial_usage": {
+        "runs": 0,
+        "note": "Known completed-round tokens only; missing or failed-round usage remains unknown.",
+        "tokens": {
+          "input_tokens": 0,
+          "cached_input_tokens": 0,
+          "cache_write_tokens": 0,
+          "output_tokens": 0
+        }
+      }
+    },
+    "optimized": {
+      "runs": 12,
+      "successful_runs": 12,
+      "failed_runs": 0,
+      "end_to_end_seconds": {
+        "count": 12,
+        "total": 202.67735970000103,
+        "mean": 16.889779975000085,
+        "median": 14.660117500000524
+      },
+      "host_seconds": {
+        "count": 12,
+        "total": 201.16283099999998,
+        "mean": 16.76356925,
+        "median": 14.522737
+      },
+      "model_calls": {
+        "count": 12,
+        "total": 13,
+        "mean": 1.0833333333333333,
+        "median": 1.0
+      },
+      "check_executions": {
+        "count": 12,
+        "total": 26,
+        "mean": 2.1666666666666665,
+        "median": 2.0
+      },
+      "model_input_chars": {
+        "count": 12,
+        "total": 43126,
+        "mean": 3593.8333333333335,
+        "median": 3069.0
+      },
+      "timing_breakdown": {
+        "fixture_create_seconds": {
+          "count": 12,
+          "total": 0.07052299999668321,
+          "mean": 0.005876916666390268,
+          "median": 0.005648949999340402
+        },
+        "provider_init_seconds": {
+          "count": 12,
+          "total": 0.6883672000003571,
+          "mean": 0.05736393333336309,
+          "median": 0.05764299999918876
+        },
+        "host_run_elapsed_seconds": {
+          "count": 12,
+          "total": 201.16320509999787,
+          "mean": 16.763600424999822,
+          "median": 14.52277144999971
+        },
+        "provider_call_seconds": {
+          "count": 12,
+          "total": 197.01466369999798,
+          "mean": 16.417888641666497,
+          "median": 14.196038250000129
+        },
+        "evaluation_seconds": {
+          "count": 12,
+          "total": 0.6797918000011123,
+          "mean": 0.056649316666759354,
+          "median": 0.054340050000064366
+        },
+        "artifact_save_seconds": {
+          "count": 12,
+          "total": 0.07166910000523785,
+          "mean": 0.005972425000436488,
+          "median": 0.006025450000379351
+        }
+      },
+      "measured_usage": {
+        "runs": 12,
+        "unknown_or_partial_runs": 0,
+        "tokens": {
+          "input_tokens": {
+            "count": 12,
+            "total": 149052,
+            "mean": 12421,
+            "median": 11376.5
+          },
+          "cached_input_tokens": {
+            "count": 12,
+            "total": 107520,
+            "mean": 8960,
+            "median": 8960.0
+          },
+          "cache_write_tokens": {
+            "count": 12,
+            "total": 0,
+            "mean": 0,
+            "median": 0.0
+          },
+          "output_tokens": {
+            "count": 12,
+            "total": 4851,
+            "mean": 404.25,
+            "median": 315.5
+          },
+          "uncached_input_tokens": {
+            "count": 12,
+            "total": 41532,
+            "mean": 3461,
+            "median": 2416.5
+          },
+          "total_tokens": {
+            "count": 12,
+            "total": 153903,
+            "mean": 12825.25,
+            "median": 11670.0
+          }
+        }
+      },
+      "known_partial_usage": {
+        "runs": 0,
+        "note": "Known completed-round tokens only; missing or failed-round usage remains unknown.",
+        "tokens": {
+          "input_tokens": 0,
+          "cached_input_tokens": 0,
+          "cache_write_tokens": 0,
+          "output_tokens": 0
+        }
+      }
+    }
+  }
+}

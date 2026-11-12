@@ -1,0 +1,19 @@
+# Merge this server into the active Hermes profile's mcp_servers mapping.
+# Select the interpreter where Checkgate is installed, and the task's local root.
+mcp_servers:
+  checkgate:
+    command: 'C:/Path/To/Python/python.exe'
+    args:
+      - '-B'
+      - '-m'
+      - 'mcp_server'
+      - '--root'
+      - 'C:/Path/To/your-task-project'
+    enabled: true
+    connect_timeout: 15
+    timeout: 30
+    supports_parallel_tool_calls: false
+    tools:
+      include: [checkgate_run, checkgate_status]
+      resources: false
+      prompts: false

@@ -1,0 +1,19 @@
+# Merge this server into the active Hermes profile's mcp_servers mapping.
+# Use the Python where Checkgate is installed and paths where Hermes runs (e.g. WSL).
+mcp_servers:
+  checkgate:
+    command: '/absolute/path/to/python'
+    args:
+      - '-B'
+      - '-m'
+      - 'mcp_server'
+      - '--root'
+      - '/absolute/path/to/your-task-project'
+    enabled: true
+    connect_timeout: 15
+    timeout: 30
+    supports_parallel_tool_calls: false
+    tools:
+      include: [checkgate_run, checkgate_status]
+      resources: false
+      prompts: false
